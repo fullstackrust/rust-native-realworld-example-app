@@ -1,8 +1,4 @@
-use iced::{
-  button, scrollable, text_input, Align, Application, Button, Checkbox, Column, Command, Container,
-  Element, Font, HorizontalAlignment, Length, Row, Scrollable, Settings, Text, TextInput,
-};
-use serde::{Deserialize, Serialize};
+use iced::{button, Button, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;

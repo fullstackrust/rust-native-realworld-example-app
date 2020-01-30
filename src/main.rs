@@ -1,6 +1,6 @@
 use iced::{
-    button, executor, scrollable, Application, Button, Color, Column, Command, Container, Element,
-    HorizontalAlignment, Length, Row, Scrollable, Settings, Space, Text,
+    executor, scrollable, Application, Column, Command, Container, Element, Length, Scrollable,
+    Settings,
 };
 
 mod data;
