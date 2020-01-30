@@ -6,6 +6,8 @@ edition = "2018"
 
 [dependencies]
 iced = { git = "https://github.com/hecrj/iced.git#0bdf1f23b5ab4348cccb295fcc4e9b00a65e772a" }
+iced_native = { git = "https://github.com/hecrj/iced.git#0bdf1f23b5ab4348cccb295fcc4e9b00a65e772a" }
+iced_wgpu = { git = "https://github.com/hecrj/iced.git#0bdf1f23b5ab4348cccb295fcc4e9b00a65e772a" }
 ipfs = { git = "https://github.com/ipfs-rust/rust-ipfs.git#313f25af316cd323d7e0df078013a046b9995a15" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
