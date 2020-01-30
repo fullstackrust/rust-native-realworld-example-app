@@ -1,5 +1,5 @@
 #[derive(Debug, Clone)]
-pub enum StepMessage {
+pub enum PageMessage {
   InputChanged(String),
   ToggleSecureInput(bool),
 }

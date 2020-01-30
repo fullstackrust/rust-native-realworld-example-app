@@ -1,14 +1,13 @@
 use iced::{
-    button, executor, scrollable, text_input, Application, Button, Checkbox, Color, Column,
-    Command, Container, Element, HorizontalAlignment, Length, Row, Scrollable, Settings, Space,
-    Text, TextInput,
+    button, executor, scrollable, Application, Button, Color, Column, Command, Container, Element,
+    HorizontalAlignment, Length, Row, Scrollable, Settings, Space, Text,
 };
 
 mod message;
 mod view;
 
 use crate::message::Message;
-use crate::view::step::Steps;
+use crate::view::page::Pages;
 
 pub fn main() {
     env_logger::init();
@@ -17,7 +16,7 @@ pub fn main() {
 }
 
 pub struct Page {
-    steps: Steps,
+    steps: Pages,
     scroll: scrollable::State,
     back_button: button::State,
     next_button: button::State,
@@ -31,7 +30,7 @@ impl Application for Page {
     fn new() -> (Page, Command<Message>) {
         (
             Page {
-                steps: Steps::new(),
+                steps: Pages::new(),
                 scroll: scrollable::State::new(),
                 back_button: button::State::new(),
                 next_button: button::State::new(),
@@ -53,7 +52,7 @@ impl Application for Page {
             Message::NextPressed => {
                 self.steps.advance();
             }
-            Message::StepMessage(step_msg) => {
+            Message::PageMessage(step_msg) => {
                 self.steps.update(step_msg);
             }
         }
@@ -88,7 +87,7 @@ impl Application for Page {
             .max_width(540)
             .spacing(20)
             .padding(20)
-            .push(steps.view().map(Message::StepMessage))
+            .push(steps.view().map(Message::PageMessage))
             .push(controls)
             .into();
 

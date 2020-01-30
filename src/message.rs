@@ -1,10 +1,10 @@
-pub mod step;
+pub mod page;
 
-use step::StepMessage;
+use page::PageMessage;
 
 #[derive(Debug, Clone)]
 pub enum Message {
   BackPressed,
   NextPressed,
-  StepMessage(StepMessage),
+  PageMessage(PageMessage),
 }

@@ -1,19 +1,18 @@
 use iced::{text_input, Checkbox, Column, Element, HorizontalAlignment, Length, Text, TextInput};
 
-use crate::message::step::StepMessage;
-// use crate::view::input::Input;
+use crate::message::page::PageMessage;
 
-pub struct Steps {
-  steps: Vec<Step>,
+pub struct Pages {
+  pages: Vec<Page>,
   current: usize,
 }
 
-impl Steps {
-  pub fn new() -> Steps {
-    Steps {
-      steps: vec![
-        Step::Welcome,
-        Step::TextInput {
+impl Pages {
+  pub fn new() -> Pages {
+    Pages {
+      pages: vec![
+        Page::Welcome,
+        Page::TextInput {
           value: String::new(),
           is_secure: false,
           state: text_input::State::new(),
@@ -23,13 +22,13 @@ impl Steps {
     }
   }
 
-  pub fn update(&mut self, msg: StepMessage) {
-    self.steps[self.current].update(msg);
+  pub fn update(&mut self, msg: PageMessage) {
+    self.pages[self.current].update(msg);
   }
 
-  pub fn view(&mut self) -> Element<StepMessage> {
+  pub fn view(&mut self) -> Element<PageMessage> {
     // Input::new();
-    self.steps[self.current].view()
+    self.pages[self.current].view()
   }
 
   pub fn advance(&mut self) {
@@ -49,15 +48,15 @@ impl Steps {
   }
 
   pub fn can_continue(&self) -> bool {
-    self.current + 1 < self.steps.len() && self.steps[self.current].can_continue()
+    self.current + 1 < self.pages.len() && self.pages[self.current].can_continue()
   }
 
   pub fn title(&self) -> &str {
-    self.steps[self.current].title()
+    self.pages[self.current].title()
   }
 }
 
-enum Step {
+enum Page {
   Welcome,
   TextInput {
     value: String,
@@ -66,16 +65,16 @@ enum Step {
   },
 }
 
-impl<'a> Step {
-  fn update(&mut self, msg: StepMessage) {
+impl<'a> Page {
+  fn update(&mut self, msg: PageMessage) {
     match msg {
-      StepMessage::InputChanged(new_value) => {
-        if let Step::TextInput { value, .. } = self {
+      PageMessage::InputChanged(new_value) => {
+        if let Page::TextInput { value, .. } = self {
           *value = new_value;
         }
       }
-      StepMessage::ToggleSecureInput(toggle) => {
-        if let Step::TextInput { is_secure, .. } = self {
+      PageMessage::ToggleSecureInput(toggle) => {
+        if let Page::TextInput { is_secure, .. } = self {
           *is_secure = toggle;
         }
       }
@@ -84,22 +83,22 @@ impl<'a> Step {
 
   fn title(&self) -> &str {
     match self {
-      Step::Welcome => "Welcome",
-      Step::TextInput { .. } => "Text input",
+      Page::Welcome => "Welcome",
+      Page::TextInput { .. } => "Text input",
     }
   }
 
   fn can_continue(&self) -> bool {
     match self {
-      Step::Welcome => true,
-      Step::TextInput { value, .. } => !value.is_empty(),
+      Page::Welcome => true,
+      Page::TextInput { value, .. } => !value.is_empty(),
     }
   }
 
-  fn view(&mut self) -> Element<StepMessage> {
+  fn view(&mut self) -> Element<PageMessage> {
     match self {
-      Step::Welcome => Self::welcome(),
-      Step::TextInput {
+      Page::Welcome => Self::welcome(),
+      Page::TextInput {
         value,
         is_secure,
         state,
@@ -108,11 +107,11 @@ impl<'a> Step {
     .into()
   }
 
-  fn container(title: &str) -> Column<'a, StepMessage> {
+  fn container(title: &str) -> Column<'a, PageMessage> {
     Column::new().spacing(20).push(Text::new(title).size(50))
   }
 
-  fn welcome() -> Column<'a, StepMessage> {
+  fn welcome() -> Column<'a, PageMessage> {
     Self::container("Welcome!").push(Text::new(
       "This is a simple Calculator \
                  that can be easily implemented on top of Iced.",
@@ -123,12 +122,12 @@ impl<'a> Step {
     value: &str,
     is_secure: bool,
     state: &'a mut text_input::State,
-  ) -> Column<'a, StepMessage> {
+  ) -> Column<'a, PageMessage> {
     let text_input = TextInput::new(
       state,
       "Type something to continue...",
       value,
-      StepMessage::InputChanged,
+      PageMessage::InputChanged,
     )
     .padding(10)
     .size(30);
@@ -144,7 +143,7 @@ impl<'a> Step {
       .push(Checkbox::new(
         is_secure,
         "Enable password mode",
-        StepMessage::ToggleSecureInput,
+        PageMessage::ToggleSecureInput,
       ))
       .push(Text::new(
         "A text input produces a message every time it changes. It is \
