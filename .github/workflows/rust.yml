@@ -1,0 +1,25 @@
+name: Rust Nightly & Linting
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install
+      run:
+        - rustup toolchain install nightly
+        - rustup default nightly
+        - rustup component add rustfmt-preview
+        - cargo +nightly install clippy --force
+    - name: Build
+      run: cargo build --verbose
+    - name: Linters
+      run:
+        - cargo fmt -- --write-mode=diff
+        - cargo clippy -- -D clippy
+    - name: Run tests
+      run: cargo test --verbose
