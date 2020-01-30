@@ -1,5 +1,6 @@
+use crate::page::Page;
+
 #[derive(Debug, Clone)]
 pub enum PageMessage {
-  InputChanged(String),
-  ToggleSecureInput(bool),
+  PageChanged(Page),
 }
