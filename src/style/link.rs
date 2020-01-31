@@ -10,12 +10,12 @@ impl button::StyleSheet for Link {
             Link::Nav { selected } => {
                 if *selected {
                     button::Style {
-                        text_color: Color::from_rgb(0.10, 0.10, 0.10),
+                        text_color: Color::from_rgb(0.20, 0.20, 0.20),
                         ..button::Style::default()
                     }
                 } else {
                     button::Style {
-                        text_color: Color::from_rgb(0.84, 0.84, 0.84),
+                        text_color: Color::from_rgb(0.70, 0.70, 0.70),
                         ..button::Style::default()
                     }
                 }
@@ -28,7 +28,7 @@ impl button::StyleSheet for Link {
             Link::Nav { selected } => {
                 if *selected {
                     button::Style {
-                        text_color: Color::from_rgb(0.10, 0.10, 0.10),
+                        text_color: Color::from_rgb(0.20, 0.20, 0.20),
                         ..button::Style::default()
                     }
                 } else {
