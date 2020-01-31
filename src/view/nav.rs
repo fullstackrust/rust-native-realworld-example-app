@@ -1,4 +1,4 @@
-use iced::{button, Button, Row, Text};
+use iced::{button, Button, Column, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;
@@ -27,29 +27,46 @@ impl Nav {
             sign_up_button,
         } = self;
 
+        // let nav_icon = |label| {
+        //     let label = Text::new(label).size(14);
+        // };
+
         let nav_button = |state, label, link_page, current_page| {
-            let label = Text::new(label).size(16);
+            let label = Text::new(label).size(14);
             let button = Button::new(state, label).style(style::link::Link::Nav {
                 selected: link_page == current_page,
             });
 
-            button.on_press(Message::PageChanged(link_page)).padding(8)
+            button.on_press(Message::PageChanged(link_page)).padding(6)
         };
 
         Row::new()
-            .spacing(10)
-            .push(nav_button(home_button, "Home", Page::Home, current_page))
-            .push(nav_button(
-                sign_in_button,
-                "Sign in",
-                Page::SignIn,
-                current_page,
-            ))
-            .push(nav_button(
-                sign_up_button,
-                "Sign up",
-                Page::SignUp,
-                current_page,
-            ))
+            .push(
+                Column::new()
+                    .spacing(20)
+                    .push(Text::new("CONDUIT").size(20)),
+            )
+            .push(
+                Row::new()
+                    .spacing(10)
+                    .push(nav_button(home_button, "Home", Page::Home, current_page))
+                    .push(nav_button(
+                        sign_in_button,
+                        "Sign in",
+                        Page::SignIn,
+                        current_page,
+                    ))
+                    .push(nav_button(
+                        sign_up_button,
+                        "Sign up",
+                        Page::SignUp,
+                        current_page,
+                    )),
+            )
+            .spacing(80)
     }
+
+    // fn container(title: &str) -> Column<Message> {
+    //     Column::new().spacing(20).push(Text::new(title).size(50))
+    // }
 }
