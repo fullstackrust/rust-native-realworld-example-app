@@ -1,4 +1,4 @@
-use iced::{button, Button, Column, Row, Text};
+use iced::{button, Button, Column, Font, HorizontalAlignment, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;
@@ -39,12 +39,21 @@ impl Nav {
 
             button.on_press(Message::PageChanged(link_page)).padding(6)
         };
+        // Fonts
+        const ICONS: Font = Font::External {
+            name: "Icons",
+            bytes: include_bytes!("../resources/icons.ttf"),
+        };
 
         Row::new()
             .push(
-                Column::new()
-                    .spacing(20)
-                    .push(Text::new("CONDUIT").size(20)),
+                Column::new().spacing(10).push(
+                    Text::new("conduit")
+                        .color([0.43, 0.84, 0.43])
+                        //.font(ICONS)
+                        .size(16)
+                        .horizontal_alignment(HorizontalAlignment::Center),
+                ),
             )
             .push(
                 Row::new()
