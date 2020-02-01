@@ -27,10 +27,6 @@ impl Nav {
             sign_up_button,
         } = self;
 
-        // let nav_icon = |label| {
-        //     let label = Text::new(label).size(14);
-        // };
-
         let nav_button = |state, label, link_page, current_page| {
             let label = Text::new(label).size(14);
             let button = Button::new(state, label).style(style::link::Link::Nav {
@@ -39,19 +35,20 @@ impl Nav {
 
             button.on_press(Message::PageChanged(link_page)).padding(6)
         };
-        // Fonts
-        const ICONS: Font = Font::External {
-            name: "Icons",
-            bytes: include_bytes!("../resources/icons.ttf"),
+
+        // Font
+        const LOGO_FONT: Font = Font::External {
+            name: "TitilliumWeb-Bold",
+            bytes: include_bytes!("../resources/TitilliumWeb-Bold.ttf"),
         };
 
         Row::new()
             .push(
                 Column::new().spacing(10).push(
                     Text::new("conduit")
-                        .color([0.43, 0.84, 0.43])
-                        //.font(ICONS)
-                        .size(16)
+                        .color([0.361, 0.722, 0.361])
+                        .font(LOGO_FONT)
+                        .size(48)
                         .horizontal_alignment(HorizontalAlignment::Center),
                 ),
             )
@@ -74,8 +71,4 @@ impl Nav {
             )
             .spacing(80)
     }
-
-    // fn container(title: &str) -> Column<Message> {
-    //     Column::new().spacing(20).push(Text::new(title).size(50))
-    // }
 }
