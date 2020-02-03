@@ -47,8 +47,8 @@ impl Nav {
         Column::new()
             .push(
                 Row::new()
-                    .width(Length::FillPortion(2))
-                    .spacing(405)
+                    .width(Length::Fill)
+                    .spacing(550)
                     .align_items(Align::Center)
                     .push(
                         Column::new().padding(20).spacing(50).push(
@@ -60,7 +60,7 @@ impl Nav {
                     )
                     .push(
                         Row::new()
-                            .spacing(40)
+                            .spacing(20)
                             .padding(15)
                             .push(nav_button(home_button, "Home", Page::Home, current_page))
                             .push(nav_button(
@@ -83,6 +83,8 @@ impl Nav {
                         Button::new(
                             brand_button,
                             Column::new()
+                                .width(Length::Fill)
+                                .align_items(Align::Center)
                                 .push(
                                     Row::new().padding(10).push(
                                         Text::new("conduit")
