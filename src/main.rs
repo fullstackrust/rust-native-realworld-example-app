@@ -57,9 +57,9 @@ impl Application for Conduit {
 
     fn view(&mut self) -> Element<Message> {
         let content: Element<_> = Column::new()
-            .max_width(540)
-            .spacing(20)
-            .padding(20)
+            .width(Length::Fill)
+            .spacing(10)
+            .padding(10)
             .push(self.nav.view(self.page))
             .push(layout(self.page))
             .into();

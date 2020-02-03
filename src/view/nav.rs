@@ -1,4 +1,4 @@
-use iced::{button, Button, Column, Font, HorizontalAlignment, Length, Row, Text};
+use iced::{button, Align, Button, Column, Font, HorizontalAlignment, Length, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;
@@ -31,7 +31,7 @@ impl Nav {
         } = self;
 
         let nav_button = |state, label, link_page, current_page| {
-            let label = Text::new(label).size(14);
+            let label = Text::new(label).size(18);
             let button = Button::new(state, label).style(style::link::Link::Nav {
                 selected: link_page == current_page,
             });
@@ -47,17 +47,21 @@ impl Nav {
         Column::new()
             .push(
                 Row::new()
+                    .width(Length::FillPortion(2))
+                    .spacing(405)
+                    .align_items(Align::Center)
                     .push(
-                        Column::new().spacing(10).push(
+                        Column::new().padding(20).spacing(50).push(
                             Text::new("conduit")
                                 .color([0.361, 0.722, 0.361])
                                 .font(BRAND_FONT)
-                                .size(24), //.horizontal_alignment(HorizontalAlignment::Center),
+                                .size(42), //.horizontal_alignment(HorizontalAlignment::Center),
                         ),
                     )
                     .push(
                         Row::new()
-                            .spacing(10)
+                            .spacing(40)
+                            .padding(15)
                             .push(nav_button(home_button, "Home", Page::Home, current_page))
                             .push(nav_button(
                                 sign_in_button,
@@ -71,22 +75,34 @@ impl Nav {
                                 Page::SignUp,
                                 current_page,
                             )),
-                    )
-                    .spacing(250),
+                    ),
             )
             .push(
                 Row::new()
                     .push(
                         Button::new(
                             brand_button,
-                            Row::new().spacing(10).spacing(250).push(
-                                Text::new("conduit")
-                                    .color([1.0, 1.0, 1.0])
-                                    .font(BRAND_FONT)
-                                    .size(72)
-                                    .width(Length::Fill)
-                                    .horizontal_alignment(HorizontalAlignment::Center),
-                            ),
+                            Column::new()
+                                .push(
+                                    Row::new().padding(10).push(
+                                        Text::new("conduit")
+                                            .color([1.0, 1.0, 1.0])
+                                            .font(BRAND_FONT)
+                                            .size(100)
+                                            .width(Length::Fill)
+                                            .horizontal_alignment(HorizontalAlignment::Center),
+                                    ),
+                                )
+                                .push(
+                                    Row::new().padding(5).push(
+                                        Text::new("A place to share your knowledge.")
+                                            .color([1.0, 1.0, 1.0])
+                                            //.font(BRAND_FONT)
+                                            .size(26)
+                                            .width(Length::Fill)
+                                            .horizontal_alignment(HorizontalAlignment::Center),
+                                    ),
+                                ),
                         )
                         .width(Length::Fill)
                         .min_height(169) // 105px + 32px padding-top & 32px padding-bottom
@@ -94,7 +110,7 @@ impl Nav {
                         .on_press(Message::NoOp())
                         .style(style::link::Link::Brand),
                     )
-                    .spacing(250),
+                    .spacing(0),
             )
     }
 }
