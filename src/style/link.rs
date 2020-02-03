@@ -1,7 +1,8 @@
-use iced::{button, Color};
+use iced::{button, Background, Color};
 
 pub enum Link {
     Nav { selected: bool },
+    Brand,
 }
 
 impl button::StyleSheet for Link {
@@ -20,6 +21,12 @@ impl button::StyleSheet for Link {
                     }
                 }
             }
+            Link::Brand => button::Style {
+                background: Some(Background::Color(Color::from_rgb(0.361, 0.722, 0.361))),
+                border_radius: 0,
+                text_color: Color::WHITE,
+                ..button::Style::default()
+            },
         }
     }
 
@@ -38,6 +45,12 @@ impl button::StyleSheet for Link {
                     }
                 }
             }
+            Link::Brand => button::Style {
+                background: Some(Background::Color(Color::from_rgb(0.361, 0.722, 0.361))),
+                border_radius: 0,
+                text_color: Color::WHITE,
+                ..button::Style::default()
+            },
         }
     }
 }
