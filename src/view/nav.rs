@@ -1,7 +1,4 @@
-use iced::{
-    button, scrollable, Align, Button, Color, Column, Container, Element, Font,
-    HorizontalAlignment, Length, Row, Scrollable, Text,
-};
+use iced::{button, Button, Column, Font, HorizontalAlignment, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;
@@ -12,8 +9,7 @@ pub struct Nav {
     home_button: button::State,
     sign_in_button: button::State,
     sign_up_button: button::State,
-    scroll: scrollable::State,
-    debug: bool,
+    brand_button: button::State,
 }
 
 impl Nav {
@@ -22,8 +18,7 @@ impl Nav {
             home_button: button::State::new(),
             sign_in_button: button::State::new(),
             sign_up_button: button::State::new(),
-            scroll: scrollable::State::new(),
-            debug: false,
+            brand_button: button::State::new(),
         }
     }
 
@@ -32,8 +27,7 @@ impl Nav {
             home_button,
             sign_in_button,
             sign_up_button,
-            scroll,
-            debug,
+            brand_button,
         } = self;
 
         let nav_button = |state, label, link_page, current_page| {
@@ -44,23 +38,6 @@ impl Nav {
 
             button.on_press(Message::PageChanged(link_page)).padding(6)
         };
-
-        let content: Element<_> = Column::new()
-            .max_width(540)
-            .spacing(20)
-            .padding(20)
-            // .push(steps.view(self.debug).map(Message::StepMessage))
-            // .push(controls)
-            .into();
-
-        let content = if self.debug {
-            content.explain(Color::BLACK)
-        } else {
-            content
-        };
-
-        let scrollable =
-            Scrollable::new(scroll).push(Container::new(content).width(Length::Fill).center_x());
 
         // Font
         const BRAND_FONT: Font = Font::External {
@@ -99,24 +76,25 @@ impl Nav {
             )
             .push(
                 Row::new()
-                    .spacing(20)
-                    .align_items(Align::Center)
                     .push(
-                        Column::new().spacing(10).push(
-                            Text::new("conduit")
-                                .color([0.361, 0.722, 0.361])
-                                .font(BRAND_FONT)
-                                .size(48)
-                                .horizontal_alignment(HorizontalAlignment::Center),
-                        ),
+                        Button::new(
+                            brand_button,
+                            Row::new()
+                                .spacing(10)
+                                .spacing(250)
+                                //.push(delete_icon())
+                                .push(
+                                    Text::new("conduit")
+                                        .color([1.0, 1.0, 1.0])
+                                        .font(BRAND_FONT)
+                                        .size(72)
+                                        .horizontal_alignment(HorizontalAlignment::Center),
+                                ),
+                        )
+                        .padding(100)
+                        .style(style::link::Link::Brand),
                     )
-                    .spacing(0),
-            )
-            .push(
-                Container::new(scrollable)
-                    .height(Length::Fill)
-                    .center_y()
-                    .into(),
+                    .spacing(250),
             )
     }
 }
