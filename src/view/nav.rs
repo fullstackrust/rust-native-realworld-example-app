@@ -1,4 +1,4 @@
-use iced::{button, Button, Column, Font, HorizontalAlignment, Row, Text};
+use iced::{button, Button, Column, Font, HorizontalAlignment, Length, Row, Text};
 
 use crate::message::Message;
 use crate::page::Page;
@@ -79,19 +79,19 @@ impl Nav {
                     .push(
                         Button::new(
                             brand_button,
-                            Row::new()
-                                .spacing(10)
-                                .spacing(250)
-                                //.push(delete_icon())
-                                .push(
-                                    Text::new("conduit")
-                                        .color([1.0, 1.0, 1.0])
-                                        .font(BRAND_FONT)
-                                        .size(72)
-                                        .horizontal_alignment(HorizontalAlignment::Center),
-                                ),
+                            Row::new().spacing(10).spacing(250).push(
+                                Text::new("conduit")
+                                    .color([1.0, 1.0, 1.0])
+                                    .font(BRAND_FONT)
+                                    .size(72)
+                                    .width(Length::Fill)
+                                    .horizontal_alignment(HorizontalAlignment::Center),
+                            ),
                         )
-                        .padding(100)
+                        .width(Length::Fill)
+                        .min_height(169) // 105px + 32px padding-top & 32px padding-bottom
+                        // .padding(32)
+                        .on_press(Message::NoOp())
                         .style(style::link::Link::Brand),
                     )
                     .spacing(250),

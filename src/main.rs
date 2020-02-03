@@ -45,6 +45,7 @@ impl Application for Conduit {
             Message::PageChanged(page) => {
                 self.page = page;
             }
+            Message::NoOp() => {}
         }
 
         Command::none()
