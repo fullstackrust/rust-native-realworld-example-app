@@ -16,9 +16,10 @@ impl Home {
         }
     }
 
-    pub fn view(&mut self, sign_in_button, current_page: Page) -> Column<Message> {
+    pub fn view(&mut self, current_page: Page) -> Column<Message> {
         let Home { sign_in_button } = self;
-        let state = sign_in_button;
+        //let state = sign_in_button;
+        //let (var1, var2, var3) = functionreturningatuple();
         let tag_data = vec![
             "but",
             "test",
@@ -43,14 +44,15 @@ impl Home {
         ];
 
         // reduced to newColumn
-        fn new_column(data: Vec<&str>, is_secure: bool) -> Column<Message> {
+        //(0..n).fold((0, 1), |(a, b), _| (b, a + b)).0
+        fn new_column(data: Vec<&str>, sign_in_button: button::State) -> Column<Message> {
             Column::new().padding(10).spacing(5).push(data.iter().fold(
                 Column::new().padding(5).spacing(10),
-                |choices, language| {
+                |choices, label| {
                     choices.push(
                         Button::new(
-                            state,
-                            Text::new(language.to_string())
+                            &mut sign_in_button,
+                            Text::new(label.to_string())
                                 .color(Color::WHITE)
                                 .horizontal_alignment(HorizontalAlignment::Center),
                         )
@@ -63,7 +65,7 @@ impl Home {
             //Column::new().push(Text::new("home"))
         }
 
-        let email_row = new_column(tag_data, true);
+        let email_row = new_column(tag_data, *sign_in_button);
 
         Column::new().push(Text::new("Home Page"))
     }
