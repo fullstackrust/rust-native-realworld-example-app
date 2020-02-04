@@ -16,9 +16,9 @@ impl Home {
         }
     }
 
-    pub fn view(&mut self, Home:sign_in_button, current_page: Page) -> Column<Message> {
+    pub fn view(&mut self, sign_in_button, current_page: Page) -> Column<Message> {
         let Home { sign_in_button } = self;
-        let state = Home: sign_in_button;
+        let state = sign_in_button;
         let tag_data = vec![
             "but",
             "test",
