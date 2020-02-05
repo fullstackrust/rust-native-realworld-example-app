@@ -1,3 +1,6 @@
+use crate::message::Message;
+use crate::page::Page;
+use crate::view::nav::Nav;
 use iced::{
     executor, scrollable, Application, Column, Command, Container, Element, Length, Row,
     Scrollable, Settings,
@@ -8,10 +11,6 @@ mod message;
 mod page;
 mod style;
 mod view;
-
-use crate::message::Message;
-use crate::page::Page;
-use crate::view::nav::Nav;
 
 pub fn main() {
     env_logger::init();
@@ -52,7 +51,7 @@ impl Application for Conduit {
     }
 
     fn title(&self) -> String {
-        "Conduit".to_owned()
+        "Conduit".to_string()
     }
 
     fn view(&mut self) -> Element<Message> {
@@ -72,16 +71,6 @@ impl Application for Conduit {
             .center_y()
             .into()
     }
-}
-
-fn layout<'a>(page: page::Page) -> Row<'a, Message> {
-    let page = match page {
-        Page::Home => view::home::new(),
-        Page::SignIn => view::sign_in::new(),
-        Page::SignUp => view::sign_up::new(),
-    };
-
-    Row::new().push(page)
 }
 
 // This should be gracefully handled by Iced in the future. Probably using our
